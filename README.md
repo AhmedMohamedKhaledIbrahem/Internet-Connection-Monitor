@@ -68,7 +68,7 @@ lifecycleScope.launch {
 ```
 in compose
 ```kotlin
-    val status by monitor.statusFlow.collect.collectAsState()
+    val status by monitor.statusFlow.collectAsState()
         when (status) {
             ConnectivityStatus.CONNECTED -> {handle logic here when the status connected}
             ConnectivityStatus.DISCONNECTED -> { handle logic here when the status disconnected}
@@ -79,7 +79,7 @@ in compose
 Performs an immediate internet connectivity check by verifying both network and remote address reachability.
 if you want to use it , you should run in coroutine scope or suspend function
 ```kotlin
-suspen fun fetchData(context:Context){
+suspend fun fetchData(context:Context){
 if(!monitor.hasConnection(context = context)){
 //do somthing
 }
