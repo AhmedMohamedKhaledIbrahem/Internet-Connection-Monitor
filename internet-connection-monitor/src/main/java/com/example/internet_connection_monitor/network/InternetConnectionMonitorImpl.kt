@@ -163,7 +163,7 @@ class InternetConnectionMonitorImpl(
 
     companion object {
         private val defaultCheckOptions = listOf(
-            AddressCheckOption("https://1.1.1.1"),
+           
             AddressCheckOption("https://8.8.8.8"),
         )
         private const val CHECK_INTERVAL: Long = 5000L
