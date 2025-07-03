@@ -10,7 +10,7 @@ A lightweight Kotlin library to monitor actual internet connectivity (not just n
 - StateFlow.
 - coroutines.
 # How it Works
-### Instead of relying only on `ConnectivityManager`, this library sends a **HEAD** request to public URLs (e.g., `1.1.1.1`, `8.8.8.8`) to confirm internet access.
+### Instead of relying only on `ConnectivityManager`, this library sends a **HEAD** request to public URLs (e.g., `8.8.8.8`) to confirm internet access.
 It emits one of the following states:
 ```kotlin
 enum class ConnectivityStatus {
