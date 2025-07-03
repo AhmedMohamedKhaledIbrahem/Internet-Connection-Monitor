@@ -6,9 +6,9 @@ import com.example.internet_connection_monitor.data.ConnectivityStatus
 import kotlinx.coroutines.flow.StateFlow
 
 interface InternetConnectionMonitor {
-    fun startMonitoring(context: Context)
+    fun startMonitoring()
     val statusFlow: StateFlow<ConnectivityStatus?>
-    suspend fun hasConnection(context: Context): Boolean
+    suspend fun hasConnection(): Boolean
     fun configureCheckInterval(interval: Long)
     fun configureCheckOption(options: List<AddressCheckOption>)
     fun configureCheckOption(option: AddressCheckOption)

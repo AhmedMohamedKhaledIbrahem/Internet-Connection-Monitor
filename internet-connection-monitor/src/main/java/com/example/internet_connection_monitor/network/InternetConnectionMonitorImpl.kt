@@ -24,7 +24,7 @@ import java.net.MalformedURLException
 import java.net.URL
 
 class InternetConnectionMonitorImpl(
-
+    private val context: Context
 ) : InternetConnectionMonitor {
     private var checkOptions: List<AddressCheckOption> = defaultCheckOptions
     private var checkInterval: Long = CHECK_INTERVAL
@@ -44,10 +44,10 @@ class InternetConnectionMonitorImpl(
      * @see stopMonitoring
      * @see statusFlow
      */
-    override fun startMonitoring(context: Context) {
+    override fun startMonitoring() {
         scope.launch {
             while (isActive) {
-                val isConnected = hasConnection(context = context)
+                val isConnected = hasConnection()
                 _statusFlow.emit(if (isConnected) ConnectivityStatus.CONNECTED else ConnectivityStatus.DISCONNECTED)
                 delay(checkInterval)
             }
@@ -61,7 +61,7 @@ class InternetConnectionMonitorImpl(
      * @throws SecurityException if ACCESS_NETWORK_STATE permission is missing
      */
     @SuppressLint("MissingPermission")
-    override suspend fun hasConnection(context: Context): Boolean {
+    override suspend fun hasConnection(): Boolean {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_NETWORK_STATE)
             != PackageManager.PERMISSION_GRANTED
         ) {
@@ -163,7 +163,6 @@ class InternetConnectionMonitorImpl(
 
     companion object {
         private val defaultCheckOptions = listOf(
-           
             AddressCheckOption("https://8.8.8.8"),
         )
         private const val CHECK_INTERVAL: Long = 5000L
